@@ -78,3 +78,86 @@
 </body>
 </html> 
 https://fetih-netizen.github.io/Fetihcyber/
+
+
+<!DOCTYPE html><html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetih Harf Vurma Oyunu</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/2000px-World_map_-_low_resolution.svg.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+    }.harf {
+  position: absolute;
+  background-color: rgba(255, 100, 100, 0.8);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+  <script>
+    const ulkeler = {
+      Almanya: { x: 400, y: 200 },
+      ABD: { x: 100, y: 300 },
+      Rusya: { x: 700, y: 150 },
+      İtalya: { x: 450, y: 250 },
+      Çin: { x: 900, y: 300 },
+    };function rastgeleHarf() {
+  const alfabe = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  return alfabe[Math.floor(Math.random() * alfabe.length)];
+}
+
+function okAt(ulke, konum) {
+  const harfDiv = document.createElement('div');
+  harfDiv.className = 'harf';
+  harfDiv.innerText = rastgeleHarf();
+  harfDiv.style.left = konum.x + 'px';
+  harfDiv.style.top = konum.y + 'px';
+  document.body.appendChild(harfDiv);
+
+  let dx = (window.innerWidth / 2 - konum.x) / 100;
+  let dy = (window.innerHeight / 2 - konum.y) / 100;
+  let adim = 0;
+
+  const animasyon = setInterval(() => {
+    if (adim >= 100) {
+      clearInterval(animasyon);
+      return;
+    }
+    konum.x += dx;
+    konum.y += dy;
+    harfDiv.style.left = konum.x + 'px';
+    harfDiv.style.top = konum.y + 'px';
+    adim++;
+  }, 20);
+
+  harfDiv.onclick = () => {
+    harfDiv.remove();
+    clearInterval(animasyon);
+  };
+}
+
+setInterval(() => {
+  for (const [ulke, konum] of Object.entries(ulkeler)) {
+    okAt(ulke, { x: konum.x, y: konum.y });
+  }
+}, 3000);
+
+  </script>
+</body>
+</html>
