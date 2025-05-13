@@ -80,83 +80,68 @@
 https://fetih-netizen.github.io/Fetihcyber/
 
 
-<!DOCTYPE html><html lang="tr">
+
+
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fetih Harf Vurma Oyunu</title>
+  <title>MiniCraft 2D</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
+      background: #87CEEB; /* Sky blue */
       overflow: hidden;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/2000px-World_map_-_low_resolution.svg.png') no-repeat center center fixed;
-      background-size: cover;
-      font-family: Arial, sans-serif;
-    }.harf {
-  position: absolute;
-  background-color: rgba(255, 100, 100, 0.8);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  cursor: pointer;
-}
-
+    }
+    canvas {
+      display: block;
+      margin: 0 auto;
+      background: #5c4033; /* Dirt background */
+      image-rendering: pixelated;
+    }
   </style>
 </head>
 <body>
+  <canvas id="game" width="800" height="400"></canvas>
   <script>
-    const ulkeler = {
-      Almanya: { x: 400, y: 200 },
-      ABD: { x: 100, y: 300 },
-      Rusya: { x: 700, y: 150 },
-      İtalya: { x: 450, y: 250 },
-      Çin: { x: 900, y: 300 },
-    };function rastgeleHarf() {
-  const alfabe = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  return alfabe[Math.floor(Math.random() * alfabe.length)];
-}
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");const tileSize = 40;
+const rows = canvas.height / tileSize;
+const cols = canvas.width / tileSize;
 
-function okAt(ulke, konum) {
-  const harfDiv = document.createElement('div');
-  harfDiv.className = 'harf';
-  harfDiv.innerText = rastgeleHarf();
-  harfDiv.style.left = konum.x + 'px';
-  harfDiv.style.top = konum.y + 'px';
-  document.body.appendChild(harfDiv);
-
-  let dx = (window.innerWidth / 2 - konum.x) / 100;
-  let dy = (window.innerHeight / 2 - konum.y) / 100;
-  let adim = 0;
-
-  const animasyon = setInterval(() => {
-    if (adim >= 100) {
-      clearInterval(animasyon);
-      return;
-    }
-    konum.x += dx;
-    konum.y += dy;
-    harfDiv.style.left = konum.x + 'px';
-    harfDiv.style.top = konum.y + 'px';
-    adim++;
-  }, 20);
-
-  harfDiv.onclick = () => {
-    harfDiv.remove();
-    clearInterval(animasyon);
-  };
-}
-
-setInterval(() => {
-  for (const [ulke, konum] of Object.entries(ulkeler)) {
-    okAt(ulke, { x: konum.x, y: konum.y });
+const tiles = [];
+for (let y = 0; y < rows; y++) {
+  tiles[y] = [];
+  for (let x = 0; x < cols; x++) {
+    tiles[y][x] = y > 5 ? 1 : 0; // Top boş, alt toprak
   }
-}, 3000);
+}
+
+function drawTiles() {
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      if (tiles[y][x] === 1) {
+        ctx.fillStyle = "#8B4513"; // Brown dirt
+        ctx.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
+      } else {
+        ctx.clearRect(x * tileSize, y * tileSize, tileSize, tileSize);
+      }
+    }
+  }
+}
+
+canvas.addEventListener("click", (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const x = Math.floor((e.clientX - rect.left) / tileSize);
+  const y = Math.floor((e.clientY - rect.top) / tileSize);
+  if (tiles[y][x] === 1) {
+    tiles[y][x] = 0; // Kır
+  } else {
+    tiles[y][x] = 1; // Yerleştir
+  }
+  drawTiles();
+});
+
+drawTiles();
 
   </script>
 </body>
