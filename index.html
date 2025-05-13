@@ -235,3 +235,66 @@ fetih_website.html
   </footer>
 </body>
 </html>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background:
+      linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+      url('https://images.unsplash.com/photo-1584270354949-f58c225a1a2e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')
+      no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .overlay-text {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 48px;
+    font-weight: bold;
+    opacity: 0.1;
+    white-space: nowrap;
+    color: #fff;
+  }
+  .container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    padding: 40px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+  }
+  h1 { font-size: 36px; margin-bottom: 10px; }
+  p  { font-size: 18px; margin-bottom: 20px; }
+  .button {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 10px;
+    z-index: 1;
+  }
+  .button:hover { background-color: #ff4500; }
+  footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #ccc;
+    z-index: 1;
+  }
+</style>
