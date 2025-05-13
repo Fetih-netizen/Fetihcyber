@@ -10,70 +10,60 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background: url('https://images.unsplash.com/photo-1584270354949-f58c225a1a2e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+      background: url('https://images.unsplash.com/photo-1584270354949-f58c225a1a2e?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
       background-size: cover;
       color: #fff;
-    }
-
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.6);
-      min-height: 100vh;
-      padding: 50px 20px;
-      box-sizing: border-box;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       text-align: center;
     }
-
     h1 {
-      font-size: 42px;
-      margin-bottom: 20px;
+      font-size: 48px;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px #000;
     }
-
     p {
       font-size: 20px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px #000;
     }
-
     .button {
       background-color: #ff6600;
       color: white;
-      padding: 12px 25px;
+      padding: 10px 20px;
       font-size: 18px;
       border: none;
+      cursor: pointer;
       border-radius: 5px;
       text-decoration: none;
       margin: 10px;
-      display: inline-block;
+      transition: background-color 0.3s;
     }
-
     .button:hover {
       background-color: #ff4500;
     }
-
     footer {
-      margin-top: 60px;
+      position: absolute;
+      bottom: 20px;
       text-align: center;
       font-size: 14px;
       color: #ccc;
+      width: 100%;
+      text-shadow: 0 0 5px #000;
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <div class="container">
-      <h1>Fetih Cyber Team</h1>
-      <p>Türk Siber Ordusuna Hoşgeldiniz!</p>
-      <p>Biz bilgiyle fethederiz. Öğren, öğret, büyü!</p>
-      <a href="https://discord.gg/fetih" class="button">Discord'a Katıl</a>
-      <a href="https://github.com/Fetih-netizen/Fetihcyber" class="button">GitHub Sayfamıza Göz At</a>
-    </div>
-    <footer>
-      <p>© 2025 Fetih Cyber Team - Tüm Hakları Saklıdır</p>
-    </footer>
-  </div>
+  <h1>Fetih Cyber Team</h1>
+  <p>Türk Siber Ordusuna Hoşgeldiniz!</p>
+  <p>Biz bilgiyle fethederiz. Öğren, öğret, büyü!</p>
+  <a href="https://discord.gg/fetih" class="button">Discord'a Katıl</a>
+  <a href="https://github.com/Fetih-netizen/Fetihcyber" class="button">GitHub Sayfamıza Göz At</a>
+  <footer>
+    <p>© 2025 Fetih Cyber Team - Tüm Hakları Saklıdır</p>
+  </footer>
 </body>
-</html> https://fetih-netizen.github.io/Fetihcyber/
+</html>
