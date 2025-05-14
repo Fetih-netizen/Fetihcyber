@@ -82,71 +82,108 @@ https://fetih-netizen.github.io/Fetihcyber/
 
 
 
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html><html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>MiniCraft 2D</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FetihCraft</title>
   <style>
     body {
       margin: 0;
-      background: #87CEEB; /* Sky blue */
       overflow: hidden;
+      background-color: #1e1e1e;
     }
     canvas {
       display: block;
       margin: 0 auto;
-      background: #5c4033; /* Dirt background */
-      image-rendering: pixelated;
+      background: #5c94fc; /* Gökyüzü */
+    }
+    #inventory {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      display: flex;
+      gap: 10px;
+    }
+    .slot {
+      width: 40px;
+      height: 40px;
+      background: #888;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <canvas id="game" width="800" height="400"></canvas>
-  <script>
-    const canvas = document.getElementById("game");
-    const ctx = canvas.getContext("2d");const tileSize = 40;
-const rows = canvas.height / tileSize;
-const cols = canvas.width / tileSize;
+  <div id="inventory"></div>  <script>
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
 
-const tiles = [];
-for (let y = 0; y < rows; y++) {
-  tiles[y] = [];
-  for (let x = 0; x < cols; x++) {
-    tiles[y][x] = y > 5 ? 1 : 0; // Top boş, alt toprak
-  }
-}
+    const player = { x: 50, y: 300, size: 30, color: 'red' };
+    const ores = [
+      { x: 200, y: 320, type: 'Elmas' },
+      { x: 400, y: 320, type: 'Altın' },
+    ];
+    const inventory = [];
 
-function drawTiles() {
-  for (let y = 0; y < rows; y++) {
-    for (let x = 0; x < cols; x++) {
-      if (tiles[y][x] === 1) {
-        ctx.fillStyle = "#8B4513"; // Brown dirt
-        ctx.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
-      } else {
-        ctx.clearRect(x * tileSize, y * tileSize, tileSize, tileSize);
-      }
+    function drawPlayer() {
+      ctx.fillStyle = player.color;
+      ctx.fillRect(player.x, player.y, player.size, player.size);
     }
-  }
-}
 
-canvas.addEventListener("click", (e) => {
-  const rect = canvas.getBoundingClientRect();
-  const x = Math.floor((e.clientX - rect.left) / tileSize);
-  const y = Math.floor((e.clientY - rect.top) / tileSize);
-  if (tiles[y][x] === 1) {
-    tiles[y][x] = 0; // Kır
-  } else {
-    tiles[y][x] = 1; // Yerleştir
-  }
-  drawTiles();
-});
+    function drawOres() {
+      ores.forEach((ore) => {
+        ctx.fillStyle = ore.type === 'Elmas' ? 'aqua' : 'gold';
+        ctx.beginPath();
+        ctx.arc(ore.x, ore.y, 15, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
 
-drawTiles();
+    function drawGround() {
+      ctx.fillStyle = '#3c3c3c';
+      ctx.fillRect(0, 350, canvas.width, 50);
+    }
 
-  </script>
-</body>
+    function updateInventoryUI() {
+      const invDiv = document.getElementById('inventory');
+      invDiv.innerHTML = '';
+      inventory.forEach(item => {
+        const slot = document.createElement('div');
+        slot.className = 'slot';
+        slot.innerText = item;
+        invDiv.appendChild(slot);
+      });
+    }
+
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawGround();
+      drawPlayer();
+      drawOres();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') player.x += 10;
+      if (e.key === 'ArrowLeft') player.x -= 10;
+
+      ores.forEach((ore, index) => {
+        if (Math.abs(player.x - ore.x) < 20) {
+          inventory.push(ore.type);
+          ores.splice(index, 1);
+          updateInventoryUI();
+        }
+      });
+    });
+
+    updateInventoryUI();
+    setInterval(gameLoop, 1000 / 30);
+  </script></body>
 </html>
-
-
-C:\Users\kaosx>color a
-C:\Users\kaosx>dir/s
